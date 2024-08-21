@@ -4,26 +4,30 @@ import * as XLSX from "xlsx"
 import Table from "~/components/Table"
 
 export default function Home() {
-  const [tableData, setTableData] = useState([])
+  const [tableData, setTableData] = useState<any[][]>([])
 
   const handleFileUpload: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     const file = event?.target?.files?.[0]
-    const reader = new FileReader()
+    if (file) {
+      const reader = new FileReader()
 
-    reader.onload = (e) => {
-      if (e.target && e.target.result instanceof ArrayBuffer) {
-        const data = new Uint8Array(e.target.result)
-        const workbook = XLSX.read(data, { type: "array" })
-        const worksheet = workbook.Sheets[workbook.SheetNames[0]]
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 })
+      reader.onload = (e) => {
+        if (e.target && e.target.result instanceof ArrayBuffer) {
+          const data = new Uint8Array(e.target.result)
+          const workbook = XLSX.read(data, { type: "array" })
+          const worksheet = workbook.Sheets[workbook.SheetNames[0]]
+          const jsonData: any[][] = XLSX.utils.sheet_to_json(worksheet, {
+            header: 1,
+          })
 
-        setTableData(jsonData)
+          setTableData(jsonData)
+        }
       }
-    }
 
-    reader.readAsArrayBuffer(file)
+      reader.readAsArrayBuffer(file)
+    }
   }
 
   return (
