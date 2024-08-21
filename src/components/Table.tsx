@@ -1,24 +1,9 @@
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-interface Column {
-  title: string;
-  key: string;
-}
+import Paper from "@mui/material/Paper"
+import Table from "@mui/material/Table"
+import TableBody from "@mui/material/TableBody"
+import TableCell from "@mui/material/TableCell"
+import TableContainer from "@mui/material/TableContainer"
+import TableRow from "@mui/material/TableRow"
 
 export default function BasicTable({ dataSource }: { dataSource: any[][] }) {
   return (
@@ -37,5 +22,5 @@ export default function BasicTable({ dataSource }: { dataSource: any[][] }) {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  )
 }
